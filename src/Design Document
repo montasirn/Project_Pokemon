@@ -1,0 +1,52 @@
+Main.java
+    1. Welcome the user and prompt them to choose the starter pokemon, a fire type, water type or grass type. The input would be the name of the starter.
+    2. Scan the next line as a String with scanner and store the input as a String
+    3. Create a pokemon object using the starter
+    4. Prompt the user of their first battle with their rival, teach basic mechanics
+    5. Using user input allow the user to choose between the available options
+    6. After the battle the user is shown a map to travel around
+    7. Introduce random encounters that gives the pokemon exp with a random chance of dropping an item, as well as catching pokemon which is also a random chance
+    8. Hint to the user to go in the direction of the town with its first gym leader
+    9. The game ends when the user beats the gym leader
+
+Pokemon Class
+
+Instance Variables:
+    private String name - stores the name of the pokemon
+    private HashMap<String, Integer> strength - represents the strength of the pokemon, correlates to how much damage is done
+    private HashMap<String, Integer> speed - represents the speed of the pokemon, correlates to which pokemon moves first
+    private HashMap<String, Integer> defense - represents the defense of the pokemon, correlates to how much damage is negated
+    private HashMap<String, Integer> level - represents the level of the pokemon
+    private int expMax - represents the max exp a pokemon can have before leveling up
+
+Constructor
+    public Pokemon(String name)
+        based on the pokemon's name if statements will be used to to set the rest of the pokemon's stats - predetermined with a little offset using Math.random
+
+Methods
+    public void level()
+        if the pokemon's exp is higher than expMax it levels up and its stats go up
+    public void evolution()
+        if the pokemon's level is higher than 16 it evolves and gets a significant stat boost
+
+Player Class
+
+Instance Variables:
+    private String name - stores the player's name
+    private String[] pokemon - 2d array of the pokemon the player has
+
+Constructor
+    public Player(String name)
+
+Methods
+    public void addPokemon()
+        creates a pokemon object and stores it in the 2d array
+
+Battle Class
+
+private int turnNumber - turn number will be checked to be odd or even and depending on that either the player or the computer will go
+
+Method
+    public void battleStart()
+        prints the battle information to the player, checks which pokemon has a higher speed stat and they are the odd turns
+        go turn by turn and the battle ends when the other pokemon is defeated or caught, or if the players pokemon faints
