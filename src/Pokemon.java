@@ -1,4 +1,6 @@
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Pokemon {
     private String name;
@@ -9,6 +11,25 @@ public class Pokemon {
     private HashMap<String, Integer> health = new HashMap<>();
     private HashMap<String, String> type = new HashMap<>();
     private int exp, expMax;
+
+    public enum stat{
+        Strength,
+        Speed,
+        Defense,
+        Health;
+    }
+
+    EnumMap<stat, String> statMap = new EnumMap<stat, String>(stat.class);
+
+    public void intializeEnum(String str, String spd, String def, String hp){
+        statMap.put(stat.Strength, str);
+        statMap.put(stat.Speed, spd);
+        statMap.put(stat.Defense, def);
+        statMap.put(stat.Health, hp);
+
+    }
+
+
 
     public Pokemon(String name){
         exp = 0;
