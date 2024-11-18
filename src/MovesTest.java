@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class MovesTest {
@@ -16,6 +17,10 @@ public class MovesTest {
 
     EnumMap<movesList,String> moves = new EnumMap<movesList,String>(movesList.class);
 
+    public MovesTest() {
+
+    }
+
     public void setMoves(){
         moves.put(movesList.Tackle, "35");
         moves.put(movesList.Vine_Whip, "35");
@@ -29,7 +34,10 @@ public class MovesTest {
         moves.put(movesList.Bite, "60");
     }
     public void setMoves(String move1, String move2, String move3, String move4){
-        String[] move = new String[]{};
-        move = {movesList.move1};
+        ArrayList<String> moves = new ArrayList<String>();
+        moves.add(move1);
+        moves.add(move2);
+        moves.add(move3);
+        moves.add(move4);
     }
 }
