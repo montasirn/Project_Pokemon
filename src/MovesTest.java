@@ -33,11 +33,28 @@ public class MovesTest {
         moves.put(movesList.Water_Gun, "40");
         moves.put(movesList.Bite, "60");
     }
-    public void setMoves(String move1, String move2, String move3, String move4){
-        ArrayList<String> moves = new ArrayList<String>();
-        moves.add(move1);
-        moves.add(move2);
-        moves.add(move3);
-        moves.add(move4);
+    private ArrayList<movesList> pokemonMoves;
+
+    public void setMoves(movesList move1, movesList move2, movesList move3, movesList move4) {
+        pokemonMoves = new ArrayList<>();
+        pokemonMoves.add(move1);
+        pokemonMoves.add(move2);
+        pokemonMoves.add(move3);
+        pokemonMoves.add(move4);
+    }
+
+    public ArrayList<movesList> getAllMoves() {
+        return pokemonMoves;
+    }
+
+    public String getMovesPower(movesList move) {
+        return moves.get(move);
+    }
+
+    public movesList getMove(int index) {
+        if (pokemonMoves != null && index >= 0 && index < pokemonMoves.size()) {
+            return pokemonMoves.get(index);
+        }
+        throw new IndexOutOfBoundsException("Invalid move index");
     }
 }
