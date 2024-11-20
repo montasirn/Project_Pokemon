@@ -1,14 +1,22 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Pokemon charmander = new Pokemon("Charmander");
-        charmander.createPokemon(12, 9, 8, 20);
-        charmander.setMoves(MovesTest.movesList.Scratch, MovesTest.movesList.Ember, MovesTest.movesList.Slash, MovesTest.movesList.Tackle);
-
-        Pokemon squirtle = new Pokemon("Squirtle");
-        squirtle.createPokemon(10, 8, 10, 22);
-        squirtle.setMoves(MovesTest.movesList.Tackle, MovesTest.movesList.Bubble, MovesTest.movesList.Water_Gun, MovesTest.movesList.Bite);
-
-        Battle battle = new Battle(charmander, squirtle);
-        battle.start();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Welcome to the world of Pokemon! To begin choose your choice.");
+        System.out.println("Charmander (1) \nSquirtle (2)\nBulbasaur (3)");
+        int choice = s.nextInt();
+        Pokemon starter = null;
+        if (choice == 1){
+            starter = new Pokemon.Charmander();
+        }else if (choice == 2){
+            starter = new Pokemon.Squirtle();
+        }else if (choice == 3){
+            starter = new Pokemon.Bulbasaur();
+        }
+        assert starter != null;
+        System.out.println("Name: " + starter.getName());
+        System.out.println("Health: " + starter.getStat(Pokemon.stat.Health));
+        System.out.println("First move: " + starter.getMove(0));
     }
 }
