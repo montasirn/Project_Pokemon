@@ -47,10 +47,8 @@ public class MovesTest {
         pokemonMoves.add(move4);
     }
 
-    public String getMovesPower(MovesTest.movesList move) {
-        MovesTest movesTest = new MovesTest();
-        movesTest.setMoves();
-        return movesTest.getMovesPower(move);
+    public String getMovesPower(movesList move) {
+        return moves.get(move);
     }
 
 

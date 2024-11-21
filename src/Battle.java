@@ -51,6 +51,6 @@ public class Battle {
         int defense = defender.getStat(Pokemon.stat.Defense);
 
         double damageMultiplier = (random.nextDouble() * 0.2 + 0.9); // Random between 0.9 and 1.1
-        return (int) ((((2 * 50 / 5 + 2) * attack * baseDamage / defense) / 50 + 2) * damageMultiplier);
+        return (int) (((double) ((2 * attacker.getLevel() / 5 + 2) * attack * (baseDamage / defense)) / 50 + 2) * damageMultiplier);
     }
 }

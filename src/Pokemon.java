@@ -2,10 +2,20 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class Pokemon {
-    public String name;
     private int level;
     private int experience;
-    private static  int EXP_TO_LEVEL_UP = 100;
+    private static int EXP_TO_LEVEL_UP = 100;
+    private MovesTest movesTest;
+    private String name;
+    private String type1;
+    private String type2;
+    private int hp;
+    private int attack;
+    private int defense;
+    private int specialAttack;
+    private int specialDefense;
+    private int speed;
+
 
     public enum stat {
         Strength,
@@ -14,11 +24,17 @@ public class Pokemon {
         Health;
     }
 
-    public Pokemon(String name) {
+    public Pokemon(String name, String type1, String type2, int hp, int attack, int defense,
+                   int specialAttack, int specialDefense, int speed) {
         this.name = name;
-        this.movesList = new ArrayList<>();
-        this.level = 1;
-        this.experience = 0;
+        this.type1 = type1;
+        this.type2 = type2;
+        this.hp = hp;
+        this.attack = attack;
+        this.defense = defense;
+        this.specialAttack = specialAttack;
+        this.specialDefense = specialDefense;
+        this.speed = speed;
     }
 
     public void gainExperience(int exp) {
@@ -88,10 +104,9 @@ public class Pokemon {
     }
 
     public String getMovesPower(MovesTest.movesList move) {
-        MovesTest movesTest = new MovesTest();
-        movesTest.setMoves();
         return movesTest.getMovesPower(move);
     }
+
 
     public ArrayList<MovesTest.movesList> pokemonMoves;
 
@@ -103,41 +118,6 @@ public class Pokemon {
         pokemonMoves.add(move4);
     }
 
-    public static class Charmander extends Pokemon {
-        public Charmander() {
-            super("Charmander");
-            createCharmander();
-        }
-
-        public void createCharmander() {
-            createPokemon(12, 9, 8, 20);
-            setMoves(MovesTest.movesList.Scratch, MovesTest.movesList.Ember, MovesTest.movesList.Slash, MovesTest.movesList.Tackle);
-        }
-    }
-public static class Squirtle extends Pokemon{
-    public Squirtle() {
-        super("Squirtle");
-        createSquirtle();
-    }
-
-    public void createSquirtle() {
-            createPokemon(9, 8, 12, 20);
-            MovesTest squirtle = new MovesTest();
-            squirtle.setMoves(MovesTest.movesList.Bubble, MovesTest.movesList.Water_Gun, MovesTest.movesList.Bite, MovesTest.movesList.Tackle);
-        }
-    }
-public static class Bulbasaur extends Pokemon{
-    public Bulbasaur() {
-        super("Bulbasaur");
-        createBulbasaur();
-    }
-
-    public void createBulbasaur() {
-            createPokemon(10, 9, 10, 20);
-            MovesTest bulbasaur = new MovesTest();
-            bulbasaur.setMoves(MovesTest.movesList.Vine_Whip, MovesTest.movesList.Poison_Powder, MovesTest.movesList.Leech_Seed, MovesTest.movesList.Tackle);
-        }
-    }
 }
 
 
