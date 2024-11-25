@@ -1,17 +1,13 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Pokemon player1Pokemon = null;
-        Pokemon player2Pokemon = null;
-
-        List<Pokemon> availablePokemon = PokemonLoader.loadPokemonFromCSV("src/pokemon.csv");
-
-        // Now you can use these Pokémon in your game
-        for (Pokemon pokemon : availablePokemon) {
-            System.out.println(pokemon.getName());
-        }
+        Scanner s = new Scanner(System.in);
+        System.out.println("Choose your starter pokemon!\n(type name exactly)\n");
+        System.out.println("Charmander \nBulbasaur \nSquirtle ");
+        String starter = s.nextLine();
+        Pokemon p = Pokemon.createPokemon(starter);
+        System.out.println(p.getStat("attack"));
+        System.out.println(p.getStat("hp"));
     }
 }

@@ -7,9 +7,9 @@ public class Battle {
     private Random random;
     private Scanner scanner;
 
-    public Battle(Pokemon pokemon1, Pokemon pokemon2) {
+    public Battle(Pokemon pokemon1) {
         this.pokemon1 = pokemon1;
-        this.pokemon2 = pokemon2;
+        this.pokemon2 = pokemon2.randomEncounter();
         this.random = new Random();
         this.scanner = new Scanner(System.in);
     }
@@ -17,13 +17,13 @@ public class Battle {
     public void start() {
         System.out.println("Battle starts between " + pokemon1.getName() + " and " + pokemon2.getName() + "!");
 
-        while (pokemon1.getStat(Pokemon.stat.Health) > 0 && pokemon2.getStat(Pokemon.stat.Health) > 0) {
+        while (pokemon1.getStat("hp") > 0 && pokemon2.getStat("hp") > 0) {
             turn(pokemon1, pokemon2);
-            if (pokemon2.getStat(Pokemon.stat.Health) <= 0) break;
+            if (pokemon2.getStat("hp") <= 0) break;
             turn(pokemon2, pokemon1);
         }
 
-        Pokemon winner = pokemon1.getStat(Pokemon.stat.Health) > 0 ? pokemon1 : pokemon2;
+        Pokemon winner = pokemon1.getStat("hp") > 0 ? pokemon1 : pokemon2;
         System.out.println(winner.getName() + " wins the battle!");
     }
 
@@ -42,13 +42,13 @@ public class Battle {
 
         System.out.println(attacker.getName() + " used " + chosenMove + "!");
         System.out.println(defender.getName() + " took " + damage + " damage!");
-        System.out.println(defender.getName() + " HP: " + defender.getStat(Pokemon.stat.Health));
+        System.out.println(defender.getName() + " HP: " + defender.getStat("hp"));
     }
 
     private int calculateDamage(Pokemon attacker, Pokemon defender, MovesTest.movesList move) {
         int baseDamage = Integer.parseInt(attacker.getMovesPower(move));
-        int attack = attacker.getStat(Pokemon.stat.Strength);
-        int defense = defender.getStat(Pokemon.stat.Defense);
+        int attack = attacker.getStat("attack");
+        int defense = defender.getStat("defense");
 
         double damageMultiplier = (random.nextDouble() * 0.2 + 0.9); // Random between 0.9 and 1.1
         return (int) (((double) ((2 * attacker.getLevel() / 5 + 2) * attack * (baseDamage / defense)) / 50 + 2) * damageMultiplier);

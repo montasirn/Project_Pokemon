@@ -14,6 +14,7 @@ public class PokemonLoader {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 Pokemon pokemon = new Pokemon(
+                        Integer.parseInt(data[0]),
                         data[1], // Name
                         data[2], // Type1
                         data[3], // Type2
