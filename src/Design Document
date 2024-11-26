@@ -1,52 +1,115 @@
-Main.java
-    1. Welcome the user and prompt them to choose the starter pokemon, a fire type, water type or grass type. The input would be the name of the starter.
-    2. Scan the next line as a String with scanner and store the input as a String
-    3. Create a pokemon object using the starter
-    4. Prompt the user of their first battle with their rival, teach basic mechanics
-    5. Using user input allow the user to choose between the available options
-    6. After the battle the user is shown a map to travel around
-    7. Introduce random encounters that gives the pokemon exp with a random chance of dropping an item, as well as catching pokemon which is also a random chance
-    8. Hint to the user to go in the direction of the town with its first gym leader
-    9. The game ends when the user beats the gym leader
+Main
+Creates a Scanner object for user input.
+Calls MovesTest.setMoves() to initialize moves for all Pokémon.
 
-Pokemon Class
+Starter Pokémon Selection
+Calls chooseStarter(scanner) method to let the player select a starter Pokémon.
+The chosen Pokémon is stored in the starter variable.
 
-Instance Variables:
-    private String name - stores the name of the pokemon
-    private HashMap<String, Integer> strength - represents the strength of the pokemon, correlates to how much damage is done
-    private HashMap<String, Integer> speed - represents the speed of the pokemon, correlates to which pokemon moves first
-    private HashMap<String, Integer> defense - represents the defense of the pokemon, correlates to how much damage is negated
-    private HashMap<String, Integer> level - represents the level of the pokemon
-    private int expMax - represents the max exp a pokemon can have before leveling up
+Battle Loop
+Enters a while loop that continues as long as the starter Pokémon's HP is above 0.
+For each iteration:
+Creates a new Battle object with the starter Pokémon.
+Calls battle.start() to initiate and complete a battle.
+After each battle, partially heals the starter Pokémon:
+Calculates heal amount as half of the Pokémon's max HP.
+Applies healing, ensuring it doesn't exceed max HP.
+Checks if the starter's HP has dropped to 0 or below, and breaks the loop if true.
 
-Constructor
-    public Pokemon(String name)
-        based on the pokemon's name if statements will be used to to set the rest of the pokemon's stats - predetermined with a little offset using Math.random
+Game Over
+When the loop ends (starter faints), displays a game over message.
+
+-------------
 
 Methods
-    public void level()
-        if the pokemon's exp is higher than expMax it levels up and its stats go up
-    public void evolution()
-        if the pokemon's level is higher than 16 it evolves and gets a significant stat boost
+Constructor: Battle(Pokemon pokemon1)
+Purpose: Initializes a new battle with a given Pokémon and a randomly encountered opponent.
+Parameters:
+pokemon1: The player's Pokémon.
+Dependencies: Uses Pokemon.randomEncounter to generate an opponent and MovesTest.setMovesForPokemon to set moves for the opponent.
 
-Player Class
+Method: start()
+Purpose: Begins the battle sequence, handling turns until one Pokémon faints.
+Algorithm/Logic: Alternates turns between the two Pokémon, checking for fainted status and awarding experience to the winner.
 
-Instance Variables:
-    private String name - stores the player's name
-    private String[] pokemon - 2d array of the pokemon the player has
+Method: turn(Pokemon attacker, Pokemon defender)
+Purpose: Executes a single turn for the attacking Pokémon.
+Parameters:
+attacker: The Pokémon taking its turn.
+defender: The opposing Pokémon.
+Algorithm/Logic: Prompts for move selection, validates input, calculates damage, and applies it to the defender.
 
-Constructor
-    public Player(String name)
+Method: calculateDamage(Pokemon attacker, Pokemon defender, MovesTest.movesList move)
+Purpose: Calculates the damage dealt by an attacker's move on a defender.
+Parameters:
+attacker: The attacking Pokémon.
+defender: The defending Pokémon.
+move: The move being used.
+Return Value: Returns the calculated damage as an integer.
+Algorithm/Logic: Uses a formula involving attacker's level, move power, attack and defense stats, and a random multiplier.
+Class: Pokemon
+Purpose
+The Pokemon class represents a Pokémon with attributes such as level, stats, moves, and experience. It provides methods for managing battles and leveling up.
 
 Methods
-    public void addPokemon()
-        creates a pokemon object and stores it in the 2d array
+Constructor: Pokemon(...)
+Purpose: Initializes a new Pokémon with specified attributes.
+Parameters: Various attributes including name, types, stats, etc.
 
-Battle Class
+Method: gainExperience(int exp)
+Purpose: Increases the Pokémon's experience and handles leveling up if necessary.
+Parameters:
+exp: Amount of experience gained.
 
-private int turnNumber - turn number will be checked to be odd or even and depending on that either the player or the computer will go
+Method: levelUp()
+Purpose: Increases the level of the Pokémon and enhances its stats.
+Algorithm/Logic: Increments level and randomly increases stats.
 
-Method
-    public void battleStart()
-        prints the battle information to the player, checks which pokemon has a higher speed stat and they are the odd turns
-        go turn by turn and the battle ends when the other pokemon is defeated or caught, or if the players pokemon faints
+Method: getStat(String var)
+Purpose: Retrieves a specific stat value based on its name.
+Parameters:
+var: Name of the stat (e.g., "hp", "attack").
+Return Value: Returns the value of the specified stat.
+
+Method: randomEncounter(int starterlevel)
+Purpose: Generates a random opponent Pokémon based on the player's level.
+Parameters:
+starterlevel: Level of the player's Pokémon for reference.
+Return Value: Returns a randomly selected opponent Pokémon.
+
+Method: takeDamage(int damage)
+Purpose: Reduces the Pokémon's HP by the specified damage amount.
+Parameters:
+damage: Amount of damage taken.
+Class: PokemonLoader
+Purpose
+The PokemonLoader class is responsible for loading Pokémon data from an external CSV file into a list of Pokemon objects.
+
+Methods
+Method: loadPokemonFromCSV(String fileName)
+Purpose: Reads data from a CSV file to create and return a list of Pokemon objects.
+Parameters:
+fileName: Path to the CSV file containing Pokémon data.
+Return Value: Returns a list of loaded Pokemon objects.
+Algorithm/Logic: Parses each line of the CSV to extract attributes and construct Pokemon instances.
+
+Enum: movesList
+Description: An enumeration that lists all possible moves available in the game.
+
+Methods
+Constructor: MovesTest()
+Purpose: Default constructor for the MovesTest class.
+
+Method: setMoves()
+Purpose: Initializes the power values for each move in the movesList enumeration.
+Algorithm/Logic: Uses an EnumMap to map each move to its corresponding power value as a string.
+
+Method: getMovesPower(movesList move)
+Purpose: Retrieves the power associated with a specified move.
+Parameters:
+move: The move for which to retrieve power information.
+Return Value: Returns the power of the specified move as a string.
+
+Method: instanciateMoves()
+Purpose: Assigns specific moves to Pokémon based on their names.
+Algorithm/Logic: Loads available Pokémon from a CSV file and assigns moves using a switch-case statement based on the Pokémon's name.
